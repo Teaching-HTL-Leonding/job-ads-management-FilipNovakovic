@@ -1,0 +1,38 @@
+<p>job-detail works!</p>
+
+<!-- job-detail.component.html -->
+<div class="job-detail">
+  <h2>Job Details</h2>
+  <button (click)="navigateBack()">Go Back</button>
+  <!-- Job Details Section -->
+  <div *ngIf="jobAd() as job">
+    <h3 *ngIf="!isEditing()">{{ job.title }}</h3>
+    <textarea *ngIf="isEditing()" [(ngModel)]="editableTitle"></textarea>
+    <p *ngIf="!isEditing()"><strong>Job Description (EN):</strong> {{ job.textEN }}</p>
+    <textarea *ngIf="isEditing()" [(ngModel)]="editableTextEN"></textarea>
+    <button (click)="editJob()" *ngIf="!isEditing()">Edit</button>
+    <button (click)="saveJob()" *ngIf="isEditing()">Save</button>
+    <!-- All Translations Display -->
+    <div *ngIf="AllTranslations().length > 0">
+      <h4 *ngIf="!isEditingTranslation()">All Translations:</h4>
+      <textarea *ngIf="isEditingTranslation()" [(ngModel)]="addTranslationTitle"></textarea>
+      <textarea *ngIf="isEditingTranslation()" [(ngModel)]="addTranslationConten"></textarea>
+      <button (click)="addTranslation()" *ngIf="!isEditingTranslation()">Add Translation</button>
+      <button (click)="saveTranslation()" *ngIf="isEditingTranslation()">Save Translation</button>
+      <!-- delete translation -->
+      <form (submit)="deleteTranslation()">
+        <label>Sprache die gelöscht werden soll</label>
+        <input type="text" [(ngModel)]="deleteLanguage" name="deleteLanguage" />
+
+        <button type="submit">Löschen</button>
+      </form>
+
+      <ul>
+        <li *ngFor="let translation of AllTranslations()">
+          <strong>{{ translation.language }}:</strong> {{ translation.translatedText }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
