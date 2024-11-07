@@ -1,0 +1,8 @@
+<h2>Job List</h2>
+
+<div *ngFor="let job of jobAds(); let i = index" class="job-item">
+  <h3>{{ job.title }}</h3>
+  <p>{{ job.textEN }}</p>
+  <button (click)="deleteJobById(job.id)">Delete</button>
+  <button (click)="viewJobDetails(job.id)">View</button>
+</div>
